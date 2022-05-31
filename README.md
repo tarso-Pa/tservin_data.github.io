@@ -1,4 +1,4 @@
-![yomero](/images/yop.jpg)
+![](/images/yop.jpg)
 
 
 # Tadeo Roberto Servin Ordoñez
