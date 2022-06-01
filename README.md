@@ -1,42 +1,19 @@
-![](/images/yop.jpg)
-
-
 # Tadeo Roberto Servin Ordoñez
 ## Bienvenido a mi portafolio de Análisis de Datos <em>#DataAnalysis</em>
 
-### Excel
+### 1. Excel
 Aquí muestro alguno de los trabajos que realizado en MS Excel. Funciones como BUSCARV(), PROMEDIO() y herramientas como tablas y gráficos dinámicos son utilizados en ellos. ¡Pura diversión!
 
-* 
+* [11 Ejercicios de Excel: Limpieza de datos, tablas y gráficos dinámicos, Dashboard y algunos tipos de gráficos.](Excel/11%20Ejercicios_LimpiezaGr%C3%A1ficosDashboard.xlsx)
 
-### Markdown
+### 2. SQL
+[Próximamente]
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### 3. Phyton
+[Próximamente]
 
-```markdown
-Syntax highlighted code block
+### 4. R
+[Próximamente]
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/tarso-Pa/tarso-Pa.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+### 5. Proyectos personales
+[Próximamente]
