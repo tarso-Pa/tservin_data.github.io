@@ -1,4 +1,5 @@
-# Tadeo Roberto Servin Ordoñez
+# **Tadeo Roberto Servin Ordoñez**
+
 ## Bienvenido a mi portafolio de Análisis de Datos <em>#DataAnalysis</em>
 
 ### 1. Excel
@@ -9,10 +10,10 @@ Aquí muestro alguno de los trabajos que realizado en MS Excel. Funciones como B
 ### 2. SQL
 [Próximamente]
 
-### 3. Phyton
+### 3. Tableau - Power BI
 [Próximamente]
 
-### 4. R
+### 4. Phyton - R
 [Próximamente]
 
 ### 5. Proyectos personales
