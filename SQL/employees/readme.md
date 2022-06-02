@@ -2,9 +2,9 @@
 
 
 1. Ejercicios básicos de SQL usando XAAMP y MySQL usando la base de datos employees.sql 
-  * consultas_employees.sql --> Consultas.
-  * employees.mwb --> Diseño de la base de datos con la ayuda de MySQL Workbench.
-  * employees.xlsx --> Comprobando las consultas realizadas en SQL con tablas dinámicas en Excel.
+  * [consultas_employees.sql](SQL/employees/consultas_employees.sql) -- Consultas.
+  * [employees.mwb](SQL/employees/consultas_employees.mwb) -- Diseño de la base de datos con la ayuda de MySQL Workbench.
+  * [employees.xlsx](SQL/employees/consultas_employees.xlsx) -- Comprobando las consultas realizadas en SQL con tablas dinámicas en Excel.
   
 2. Ejercicios más avanzados, con subconsultas entre tablas. --> Próximanente.
 
