@@ -7,7 +7,7 @@ Aquí muestro alguno de los trabajos que realizado en MS Excel. Funciones como B
 * [11 Ejercicios de Excel: Limpieza de datos, tablas y gráficos dinámicos, Dashboard y algunos tipos de gráficos.](Excel/11%20Ejercicios_LimpiezaGr%C3%A1ficosDashboard.xlsx)
 
 ### 2. SQL
-* [Ejercicios de consultas con la base de datos employees.sql](SQL/emmployees)
+* [Ejercicios de consultas con la base de datos employees.sql](SQL/employees)
 
 ### 3. Phyton
 [Próximamente]
