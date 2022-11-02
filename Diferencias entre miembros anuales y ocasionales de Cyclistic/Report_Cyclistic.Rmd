@@ -1,0 +1,591 @@
+---
+title: 'Reporte: diferencias entre miembros anuales y ocasionales de la empresa Cyclistic.'
+author: "Tadeo Roberto Servin Ordoñez"
+date: "2022-10-30"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+## Introducción
+
+En 2016, Cyclistic inició operaciones en la ciudad de Chicago. Actualmente, tiene una flota de 5,824 bicicletas georreferenciadas y bloqueadas en una red de 692 estaciones. El proceso de la renta de bicicletas se resume a: el usuario desbloquea en una estación una unidad y la devuelve en otra quedando nuevamente bloqueada y disponible para otro viaje.
+
+Al día de hoy, existen planes de precios: pases de un solo viaje y pases de un día completo para los ciclistas ocasionales y membresías anuales para los miembros de Cyclistic.
+
+Su departamento de finanzas asegura que los miembros anuales son mucho más rentables que los ciclistas ocasionales. La gerente de marketing, Lily Moreno, tiene la hipótesis de que aumentar el número de membresías anuales será importante financieramente. En lugar de propiciar el aumento clientes nuevos, la gerente ve la oportunidad de convertir a los ciclistas ocasionales en miembros anuales por el uso ya probado de las bicicletas rentadas.
+
+Para ello, se requiere entender las diferencias entre los usuarios ciclistas ocasionales y los miembros que pagan una anualidad.Resultado de ese análisis, el equipo de marketing diseñará una nueva estrategia para convencer a los ciclistas de ocasión de convertirse en miembros anuales.
+
+## Paso 1: Preguntar
+
+La meta de la gerente de marketing es: "Diseñar estrategias de marketing orientadas a convertir a los ciclistas ocasionales en miembros anuales." Por lo que, el equipo de analistas de marketing necesita entender mejor en qué difieren los miembros anuales y los ciclistas ocasionales, por qué los ciclistas ocasionales comprarían una membresía y cómo los medios digitales podrían afectar sus tácticas de marketing.
+
+En este reporte, se abordará la primera de las preguntas: "¿En qué se diferencian los socios anuales y los ciclistas ocasionales con respecto al uso de las bicicletas de Cyclistic?". Por lo que, este análisis servirá poder ver patrones de comportamiento que apoyen la meta de la gerente de mercadotecnia.
+
+### ¿Quiénes son las personas interesadas en este proyecto?
+
+-   Cyclistic: La empresa de renta de bicicletas compartidas tiene 5,800 unidades y 600 estaciones. Los usos más frecuentes de renta es para usos recreativos, pero alrededor del 30% la utiliza para ir al trabajo.
+
+-   Lily Moreno: La directora de marketing es responsable del desarrollo de campañas, en redes sociales y otros canales, para promover el programa de renta de bicicletas.
+
+-   Equipo de análisis computacional de datos de marketing de Cyclistic: se encarga de recopilar, analizar e informar datos que coadyuvan a la estrategia de marketing de la empresa. El autor de este informe, miembro de este equipo, trabaja desde hace seis meses como analista de datos júnior.
+
+-   Equipo ejecutivo de Cyclistic: Los ejecutivos de la empresa quienes decidirán si aprueba el programa de marketing recomendado, basado en el análisis de datos presente.
+
+## Paso 2: Preparar
+
+Los datos para este análisis, son proporcionados por la propia empresa (para efectos de este ejercicio, la licencia de uso de estos datos se encuentra [aquí.](https://www.divvybikes.com/data-license-agreement)). Los archivos con la información son mensuales y del tipo .csv, se pide que se analize los datos de los últimos 12 meses, de octubre del 2021 a septiembre del 2022.
+
+Los datos se organizan de esta manera:
+
+| Campo              | Español                  | Tipo       |
+|--------------------|--------------------------|------------|
+| ride_id            | id de launidad           | caracter   |
+| rideable_type      | tipo de bicicleta        | caracter   |
+| started_at         | comienza en (desbloqueo) | fecha-hora |
+| ended_at           | termina en (bloqueo)     | fecha-hora |
+| start_station_name | estación inicial         | caracter   |
+| start_station_id   | id estacion inicial      | caracter   |
+| end_station_name   | estación final           | caracter   |
+| end_station_id     | id estación final        | caracter   |
+| start_lat          | latitud inicial          | numérico   |
+| start_lng          | longitud inicial         | numérico   |
+| end_lat            | latitud final            | numérico   |
+| end_lng            | longitud final           | numérico   |
+| member_casual      | miembro u ocasional      | caracter   |
+
+En una revisión rápida, todas las columnas de todos los archivos tienen el mismo nombre. Es de notar que hay muchos registros sin observaciones en los campos referentes a las estaciones. Además, no existen campos que refieran a id o nombre de usuario, por lo que se usará el número de viajes, la duración de los mismos y el tipo de usuario para el análisis.
+
+## Paso 3: Procesar
+
+Se procede a procesar y limpiar los datos:
+
+```{r}
+# Cargando librerías
+library(tidyverse)  
+library(lubridate)  
+library(ggplot2)
+library(dplyr)
+library(lessR)
+```
+
+```{r}
+# Importando archivos csv
+m1<- read_csv("202110-divvy-tripdata.csv")
+m2<- read_csv("202111-divvy-tripdata.csv")
+m3<- read_csv("202112-divvy-tripdata.csv")
+m4<- read_csv("202201-divvy-tripdata.csv")
+m5<- read_csv("202202-divvy-tripdata.csv")
+m6<- read_csv("202203-divvy-tripdata.csv")
+m7<- read_csv("202204-divvy-tripdata.csv")
+m8<- read_csv("202205-divvy-tripdata.csv")
+m9<- read_csv("202206-divvy-tripdata.csv")
+m10<- read_csv("202207-divvy-tripdata.csv")
+m11<- read_csv("202208-divvy-tripdata.csv")
+m12<- read_csv("202209-divvy-tripdata.csv")
+```
+
+```{r}
+# Revisando nombres de columnas
+colnames(m1)
+colnames(m2)
+colnames(m3)
+colnames(m4)
+colnames(m5)
+colnames(m6)
+colnames(m7)
+colnames(m8)
+colnames(m9)
+colnames(m10)
+colnames(m11)
+colnames(m12)
+```
+
+```{r}
+# Vista previa y estructura
+glimpse(m1)
+glimpse(m2)
+glimpse(m3)
+glimpse(m4)
+glimpse(m5)
+glimpse(m6)
+glimpse(m7)
+glimpse(m8)
+glimpse(m9)
+glimpse(m10)
+glimpse(m11)
+glimpse(m12)
+```
+
+```{r}
+# Seleccionando columnas útiles y también para disminuir el impacto en la memoria RAM
+m1 <- m1 %>% select(rideable_type, started_at, ended_at, member_casual)
+m2 <- m2 %>% select(rideable_type, started_at, ended_at, member_casual)
+m3 <- m3 %>% select(rideable_type, started_at, ended_at, member_casual)
+m4 <- m4 %>% select(rideable_type, started_at, ended_at, member_casual)
+m5 <- m5 %>% select(rideable_type, started_at, ended_at, member_casual)
+m6 <- m6 %>% select(rideable_type, started_at, ended_at, member_casual)
+m7 <- m7 %>% select(rideable_type, started_at, ended_at, member_casual)
+m8 <- m8 %>% select(rideable_type, started_at, ended_at, member_casual)
+m9 <- m9 %>% select(rideable_type, started_at, ended_at, member_casual)
+m10 <- m10 %>% select(rideable_type, started_at, ended_at, member_casual)
+m11 <- m11 %>% select(rideable_type, started_at, ended_at, member_casual)
+m12 <- m12 %>% select(rideable_type, started_at, ended_at, member_casual)
+```
+
+```{r}
+# Activar cuando sea necesario:
+# Guardando cambios en el data frame en una nueva tabla
+# write_csv(total_trips_v2, "total_trips_v1.csv")
+# Cargando datos desde archivo csv
+# total_trips_v2 <- read.csv("total_trips_v1.csv")
+```
+
+## Paso 4: Analizar
+
+Antes de analizar los datos, se deben concolidar todos ellos en un data frame y revisar que tenga el formato correcto.
+
+```{r}
+# Uniendo todos los data frame
+total_trips_v2 <- bind_rows(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12)
+
+# Revisando columna, estructura y resumen
+colnames(total_trips_v2)
+glimpse(total_trips_v2)
+summary(total_trips_v2)
+```
+
+Realizando algunos cálculos preeliminares:
+
+```{r}
+# Mostrar, agrupar y ordenar de forma descendente los tipos de usuario en "member_casual".
+total_trips_v2 %>%
+  group_by(member_casual) %>%
+  summarize(n = n()) %>%
+  arrange(desc(n), .by_group=TRUE)
+
+# Mostrar, agrupar y ordenar de forma descendente los tipos de bicicleta en "rideable_type".
+total_trips_v2 %>%
+	group_by(rideable_type) %>%
+	summarize(n = n()) %>%
+  arrange(desc(n), .by_group=TRUE)
+```
+
+```{r}
+# Crear nuevas columnas a partir de "started_at" y "ended_at"
+# Esto nos ayudará más adelante a calcular estadísticas por estos periodos, en el criterio
+#de que el mismo día de desbloqueo de la bicicleta, es el mismo que el del bloqueo en otra estación
+
+total_trips_v2$date <- as.Date(total_trips_v2$started_at) 
+
+# Usar esto si se quiere que el mes aparezca abreviado
+total_trips_v2$month <- format(as.Date(total_trips_v2$date), "%b") # %m, número; %b, abreviado
+
+total_trips_v2$day <- format(as.Date(total_trips_v2$date), "%d")
+total_trips_v2$year <- format(as.Date(total_trips_v2$date), "%Y")
+total_trips_v2$day_of_week <- format(as.Date(total_trips_v2$date), "%A")
+```
+
+```{r}
+# Calculando el tiempo de uso entre desbloqueo y bloqueo de la bicicleta: "ride_length"
+total_trips_v2$ride_length <- difftime(total_trips_v2$ended_at,total_trips_v2$started_at
+                                       , units = "mins")
+```
+
+```{r}
+# Calculando media, mediana, máximo y mínimo, desviación estándar y cuartiles de "ride_length"
+mean(total_trips_v2$ride_length) 
+median(total_trips_v2$ride_length) 
+max(total_trips_v2$ride_length) 
+min(total_trips_v2$ride_length)
+sd(total_trips_v2$ride_length)
+quantile(total_trips_v2$ride_length)
+```
+
+### Problemas detectados:
+
+-   Hay mucho outliers por la derecha, hace que los valores de los cuartiles estén muy por debajo de los valores necesarios para el análisis.
+-   Hay diferencias de tiempo negativas, hay que filtrar el valor de 1 minuto hacia adelante.
+
+```{r}
+# Filtrando tiempo de viaje conforme a restricciones establecidas, mínimo 1 min, máximo 60 min.
+total_trips_v2 <- total_trips_v2 %>% 
+  filter(ride_length >= 1) %>% 
+  filter(ride_length <= 60)
+```
+
+```{r}
+# Revisando cuartiles y boxplot
+quantile(total_trips_v2$ride_length)
+# Boxplot 1
+boxplot(total_trips_v2$ride_length
+        , main = "Tiempo de viaje, con outliers"
+        , ylab = "Tiempo en minutos")
+```
+
+```{r}
+# Calculando la última observación antes de (Q3 + 1.5RI)
+# Q1 = 8.18, Q3 = 20.22, IR = Q3 - Q1
+Q1 <- 6.05
+Q3 <- 17.93
+IR <- Q3 - Q1
+out <- Q3 + (1.5 * IR)
+out
+```
+
+```{r}
+# Filtrando outliers por encima de (Q3 + 1.5RI) = 35.75. 
+total_trips_v2 <- total_trips_v2 %>% 
+  filter(ride_length <= 35.75 )
+```
+
+```{r}
+# Revisando estadísticas
+mean(total_trips_v2$ride_length) 
+sd(total_trips_v2$ride_length)
+quantile(total_trips_v2$ride_length)
+# Boxplot 2
+boxplot(total_trips_v2$ride_length
+        , main = "Tiempo de viaje"
+        , ylab = "Tiempo en minutos")
+```
+
+```{r}
+# Número de viajes y porcentaje por tipo de usuario y tipo de bicicleta ordenado
+# descendentemente por número de viajes y grupos
+total_trips_v2 %>%
+  group_by(member_casual, rideable_type) %>%
+  summarize(n = n(), pct = n() * 100 / nrow(total_trips_v2)) %>%
+  arrange(desc(n), .by_group=TRUE)
+```
+
+```{r}
+# Número de viajes y porcentaje por tipo de usuario y tipo de bicicleta ordenado
+# descendentemente por número de viajes
+total_trips_v2 %>%
+  group_by(member_casual, rideable_type) %>%
+  summarize(n = n(), pct = n() * 100 / nrow(total_trips_v2)) %>%
+  arrange(desc(n))
+```
+
+```{r}
+# Algunas medidas de tendencia central, comparando entre tipo de usuarios
+aggregate(total_trips_v2$ride_length ~ total_trips_v2$member_casual, FUN = mean)
+aggregate(total_trips_v2$ride_length ~ total_trips_v2$member_casual, FUN = median)
+aggregate(total_trips_v2$ride_length ~ total_trips_v2$member_casual, FUN = max)
+aggregate(total_trips_v2$ride_length ~ total_trips_v2$member_casual, FUN = min)
+```
+
+```{r}
+# Promedio agrupado de "ride_length" agrupado por member_casual" y "ride_length"
+aggregate(total_trips_v2$ride_length ~ total_trips_v2$member_casual 
+          + total_trips_v2$day_of_week, FUN = mean)
+```
+
+```{r}
+# Número de viajes por día de la semana
+total_trips_v2 %>%
+  group_by(day_of_week) %>%
+  summarize(n = n()) %>%
+  arrange(day_of_week)
+```
+
+```{r}
+# Reordenando la tabla en la columna "day_of_week" en secuencia de domingo a sábado.
+total_trips_v2$day_of_week <- ordered(total_trips_v2$day_of_week
+                                      , levels=c("domingo", "lunes", "martes"
+                                                 , "miércoles", "jueves", "viernes", "sábado"))
+
+# Revisando cambio anterior con aggregate
+aggregate(total_trips_v2$ride_length ~ total_trips_v2$member_casual 
+          + total_trips_v2$day_of_week, FUN = mean)
+```
+
+```{r}
+# Tabla con medidas de tendencia central y número de viajes (n) agrupada por
+# "member_casual" y "day_of_week", ordenada por "day_of_week"
+total_trips_v2 %>% 
+  group_by(member_casual, day_of_week) %>% 
+  summarize(average=mean(ride_length), median=median(ride_length), min=min(ride_length)
+            , max=max(ride_length), number_of_rides = n()) %>% 
+  arrange (day_of_week)
+```
+
+```{r}
+# Tabla con medidas de tendencia central y número de viajes (n) agrupada por
+# "member_casual" y "rideable_type", ordenada por "rideable_type"
+total_trips_v2 %>% 
+  group_by(member_casual, rideable_type) %>% 
+  summarize(average=mean(ride_length), median=median(ride_length), min=min(ride_length)
+            , max=max(ride_length), number_of_rides = n()) %>% 
+  arrange (rideable_type)
+```
+
+```{r}
+# Tabla con medidas de tendencia central y número de viajes (n) agrupada por
+# "rideable_type" y "member_casual", ordenada por "member_casual"
+total_trips_v2 %>% 
+  group_by(rideable_type, member_casual) %>% 
+  summarize(average=mean(ride_length), median=median(ride_length), min=min(ride_length)
+            , max=max(ride_length), number_of_rides = n()) %>% 
+  arrange (member_casual)
+```
+
+## Paso 5: Compartir
+
+```{r}
+# Pie chart 1: número de viajes por tipo de usuario
+table_users_type <- table(total_trips_v2$member_casual)
+table_users_type 
+PieChart(table_users_type, hole = 0, values = "%"
+         , fill = c("darkorange", "darkgreen")
+         , main = "% de viajes por tipo de usuario, oct 2021 - sept 2022", values_size = 2)
+```
+
+```{r}
+# Convirtiendo "ride_length" de formato difftime a tipo numérico para hacer el histograma
+
+class(total_trips_v2$ride_length)
+total_trips_v2$ride_length_num <- as.numeric(total_trips_v2$ride_length)
+#total_trips_v2$ride_length_num
+
+# Histograma + plotbox 1: variable "ride_length" 
+hist(x = total_trips_v2$ride_length_num
+     , main = "Histograma de tiempo de viaje\noctubre 2021 - septiembre 2022"
+     , xlab = "minutos"
+     , ylab = "frecuencia", col = "lightblue")
+axis(1) # añade eje x
+par(new = TRUE)
+boxplot(total_trips_v2$ride_length_num, horizontal = TRUE, axes = FALSE, lwd = 2
+        , col = rgb(0, 0, 0, alpha = 0.2))
+```
+
+```{r}
+# Boxplot 3: variable "ride_length" por usuario, "member_casual"
+boxplot(total_trips_v2$ride_length ~ total_trips_v2$member_casual
+        , main = "Tiempo de viaje por tipo de usuario"
+        , xlab = "Tipo de usuario"
+        , ylab = "Tiempo en minutos")
+```
+
+```{r}
+# Boxplot 4: variable "ride_length" por tipo de bicicleta, "rideable_type"
+boxplot(total_trips_v2$ride_length ~ total_trips_v2$rideable_type
+        , main = "Tiempo de viaje por tipo de bicicleta"
+        , xlab = "Tipo de bicicleta"
+        , ylab = "Tiempo en minutos")
+```
+
+```{r}
+# Reordenando la tabla en la columna "day_of_week" en secuencia de domingo a sábado.
+total_trips_v2$month <- ordered(total_trips_v2$month
+                                , levels=c("oct", "nov", "dic", "ene", "feb", "mar"
+                                           , "abr", "may","jun", "jul", "ago", "sep"))
+```
+
+```{r}
+# Gráfico de barras 1: combinando "month" con "member_casual" del número de viajes
+# Nota: los meses tienen formato abreviado. Los meses oct, nov y dic son del año 2021, 
+# los restantes corresponden al 2022
+
+total_trips_v2 %>% 
+  group_by(member_casual, month) %>% 
+  summarise(number_of_rides = n()) %>% 
+  arrange(month, member_casual) %>% 
+  ggplot(aes(x = month, y = number_of_rides, fill = member_casual)) +
+  labs(title = "Gráfico mensual del número de viajes por tipo de usuario"
+       , subtitle = "octubre 2021 - septiembre 2022"
+       , x = "mes", y = "número de viajes" ) +
+  geom_col(position = "dodge") +
+  theme(axis.text.x = element_text(angle = 45))
+```
+
+```{r}
+# Gráfico de barras 2: 
+#Similar al gráfico anterior. En lugar del número de viajes, el eje de la "y" es para el 
+# promedio de duración de viaje. Gráfico de barras NO apiladas con variables agrupadas.
+# Los meses de octubre a diciembre son del 2021, lo restantes corresponden al 2022
+total_trips_v2 %>%
+  group_by(member_casual, month) %>% 
+  summarise(number_of_rides = n(), average_duration = mean(ride_length)) %>% 
+  arrange(member_casual, month)  %>% 
+  ggplot(aes(x = month, y = average_duration, fill = member_casual)) +
+  labs(title = "Gráfico mensual del tiempo en promedio de viaje por tipo de usuario"
+       , subtitle = "octubre 2021 - septiembre 2022"
+       , x = "mes", y = "tiempo promedio en minutos" ) +
+  geom_col(position = "dodge") +
+  theme(axis.text.x = element_text(angle = 45))
+```
+
+```{r}
+# Gráfico de barras 3: combinando "month" con "rideable_type" del número de viajes
+# Nota: los meses tienen formato de caracter. Los meses 10 al 12 son del año 2021, 
+# los restantes corresponden al 2022
+ggplot(data = total_trips_v2) +
+  geom_bar(mapping = aes(x = month, fill = rideable_type)) +
+  labs(title = "Gráfico mensual del número de viajes por tipo de usuario\ny tipo de bicicleta"
+       , subtitle = "octubre 2021 - septiembre 2022"
+       , x = "mes", y = "número de viajes" ) +
+  facet_wrap(~member_casual) +
+  theme(axis.text.x = element_text(angle = 45))
+```
+
+```{r}
+# Gráfico de barras 4:  combinando "month" con "rideable_type"  y "member_casual 
+# del tiempo promedio de viaje
+# Nota: los meses tienen formato de caracter. Los meses 10 al 12 son del año 2021, 
+# los restantes corresponden al 2022
+total_trips_v2 %>% 
+  group_by(member_casual, month, rideable_type) %>% 
+  summarise(number_of_rides = n(), average_duration = mean(ride_length)) %>% 
+  arrange(member_casual, month)  %>% 
+  ggplot(aes(x = month, y = average_duration, fill = rideable_type)) +
+  labs(title = "Gráfico del tiempo promedio de viaje mes,\ntipo de bicicleta y tipo de usuario"
+       , subtitle = "octubre 2021 - septiembre 2022"
+       , x = "mes", y = "tiempo promedio en minutos" ) +
+  facet_wrap(~member_casual) +
+  theme(axis.text.x = element_text(angle = 45)) +
+  geom_col(position = "dodge")
+```
+
+```{r}
+# Gráfico de barras 5
+# Let's visualize the number of rides by rider type + facet(member_casual)
+total_trips_v2 %>% 
+  group_by(member_casual, day_of_week, rideable_type) %>% 
+  summarise(number_of_rides = n(), average_duration = mean(ride_length)) %>% 
+  arrange(member_casual, day_of_week)  %>% 
+  ggplot(aes(x = day_of_week, y = number_of_rides, fill = rideable_type)) +
+  labs(title = "Gráfico del número de viajes por día de la semana,
+       \ntipo de usuario y tipo de bicicleta"
+       , subtitle = "octubre 2021 - septiembre 2022"
+       , x = "día de la semana", y = "número de viajes" ) +
+  facet_wrap(~member_casual) +
+  theme(axis.text.x = element_text(angle = 45)) +
+  geom_col(position = "dodge")
+```
+
+```{r}
+# Gráfico de barras 6
+# Let's visualize the "average_duration" by rider type + facet(member_casual)
+total_trips_v2 %>% 
+  group_by(member_casual, day_of_week, rideable_type) %>% 
+  summarise(number_of_rides = n(), average_duration = mean(ride_length)) %>% 
+  arrange(rideable_type, day_of_week)  %>% 
+  ggplot(aes(x = day_of_week, y = average_duration, fill = rideable_type)) +
+  labs(title = "Tiempo promedio de viaje por día de la semana,
+       \ny tipo de bicicleta y tipo de usuario"
+       , subtitle = "octubre 2021 - septiembre 2022"
+       , x = "día de la semana", y = "tiempo promedio en minutos" ) +
+  facet_wrap(~member_casual) +
+  theme(axis.text.x = element_text(angle = 45)) +
+  geom_col(position = "dodge")
+```
+
+```{r}
+# Gráfico de barras 7: apilamiento combinando "rideable_type" con "member_casual" 
+# del número de viajes
+ggplot(data = total_trips_v2) +
+  geom_bar(mapping = aes(x = rideable_type, fill = member_casual)) +
+  labs(title = "Gráfico del número de viajes por tipo de bicicleta y tipo de usuario"
+       , subtitle = "octubre 2021 - septiembre 2022"
+       , x = "Tipo de bicicleta", y = "número de viajes" )
+```
+
+```{r}
+# Gráfico de barras 8: apilamiento combinando "day_of_week" con "rideable_type" del número de viajes
+ggplot(data = total_trips_v2) +
+  geom_bar(mapping = aes(x = day_of_week, fill = rideable_type)) +
+  labs(title = "Gráfico del número de viaje por día de la semana y tipo de bicicleta"
+       , subtitle = "octubre 2021 - septiembre 2022"
+       , x = "día de la semana", y = "número de viajes" )
+```
+
+```{r}
+# Gráfico de barras 9: apilamiento combinando "day_of_week" con "rideable_type" 
+# del tiempo promedio de viaje
+total_trips_v2 %>% 
+  group_by(member_casual, day_of_week, rideable_type) %>% 
+  summarise(number_of_rides = n(), average_duration = mean(ride_length)) %>% 
+  arrange(rideable_type, day_of_week)  %>% 
+  ggplot(aes(x = day_of_week, y = average_duration, fill = rideable_type)) +
+  labs(title = "Gráfico del tiempo promedio de viaje por día de la semana,\ny tipo de bicicleta"
+       , subtitle = "octubre 2021 - septiembre 2022"
+       , x = "día de la semana", y = "tiempo promedio en minutos" ) +
+  theme(axis.text.x = element_text(angle = 45)) +
+  geom_col(position = "dodge")
+```
+
+```{r}
+# Gráfico de barras 10
+# Let's visualize the number of rides by rider type + facet(member_casual)
+total_trips_v2 %>% 
+  group_by(member_casual, day_of_week, rideable_type) %>% 
+  summarise(number_of_rides = n(), average_duration = mean(ride_length)) %>% 
+  arrange(member_casual, day_of_week)  %>% 
+  ggplot(aes(x = day_of_week, y = number_of_rides, fill = member_casual)) +
+  labs(title = "Gráfico del número de viajes por día de la semana,
+       \ntipo de bicicleta y tipo de usuario"
+       , subtitle = "octubre 2021 - septiembre 2022"
+       , x = "día de la semana", y = "número de viajes" ) +
+  facet_wrap(~rideable_type) +
+  theme(axis.text.x = element_text(angle = 45)) +
+  geom_col(position = "dodge")
+```
+
+```{r}
+# Gráfico de barras 11
+# Let's create a visualization for average duration
+total_trips_v2 %>% 
+  group_by(member_casual, day_of_week, rideable_type) %>% 
+  summarise(number_of_rides = n(), average_duration = mean(ride_length)) %>% 
+  arrange(member_casual, day_of_week)  %>% 
+  ggplot(aes(x = day_of_week, y = average_duration, fill = member_casual)) +
+  labs(title = "Gráfico del tiempo promedio de viaje por día de la semana,
+       \ntipo de bicicleta y tipo de usuario"
+       , subtitle = "octubre 2021 - septiembre 2022"
+       , x = "día de la semana", y = "tiempo promedio en minutos" ) +
+  facet_wrap(~rideable_type) +
+  theme(axis.text.x = element_text(angle = 45)) +
+  geom_col(position = "dodge")
+```
+
+## Paso 6: Actuar
+
+### Conclusiones.
+
+1.  En los último 12 meses, los miembros anuales hicieron más viajes (62% del total), en comparación con los ocasionales (38%), un 24% más.
+2.  El 75% de las veces, los tiempos de viajes duraron entre 1 y 15 minutos, aproximadamente.
+3.  A partir del minuto 10 de viaje, baja considerablemente el número de viajes con mayor duración.
+4.  Los días con más viajes: sábado, jueves y viernes.
+5.  Los días con menos viajes: lunes, miércoles y martes.
+6.  En promedio, el tiempo de viaje de los ocasionales es mayor que de los anuales, al menos 20% más: **lunes, 28% más**; martes, 21.7% más; miércoles, 20.1% más; jueves, 21.3% más; viernes, 24.7% más; **sábado 25.2% más; y domingo, 27.4% más.**
+7.  Sin embargo, los miembros anuales hacen más viajes que los ocasionales: **lunes, 93.4% más; martes, 116.0% más; miércoles, 107.0 más; jueves, 89.0% más; viernes, 54% más;** sábado 5.6% más; y domingo, 12.4% más.
+8.  En general, el día con más salidas es el sábado. Sábado, domingo y lunes son los días con mayor tiempo promedio de uso en el siguiente orden: docked, clásica y eléctrica.
+9.  Resumen del uso de bicicleta por tipo de usuario y tipo de bicicleta.
+
+| Tipo de usuario | Tipo de bicicleta | Tiempo prom. min | \% de viajes |
+|-----------------|-------------------|------------------|--------------|
+| member          | classic           | 11.30            | 32.3         |
+| member          | electric          | 10.32            | 29.3         |
+| casual          | electric          | 12.61            | 21.4         |
+| casual          | classic           | 14.31            | 14.7         |
+| casual          | docked            | 19.06            | 2.2          |
+
+10. Los ocasionales tienen viajes entre 1 y 19 minutos de duración el 75% de las veces; los miembros anuales lo hacen hasta 13 minutos por viaje.
+11. Hubo un gran descenso en el uso de las bicicletas de Cyclistic entre noviembre del 2021 y abril del 2022 por una ola de Covid-19 en el condado de Cook. Aún así se ve que los miembros anuales usan más las bicicletas que los ocasionales, todos los meses de estudio; aunque se observa un notorio descenso en agosto y septiembre del 2022 entre los ocasionales.
+12. En cuanto a tiempo promedio de viaje, los ocasionales pasan un poco de más tiempo en las bicicletas clásicas que las eléctricas (11 y 14 minutos en promedio). Aunque las bicicletas clásicas las usan menos.
+13. También, en cuanto a tiempo promedio de viaje, los miembros anuales ocupan en promedio entre 9 y 12 minutos las bicicletas clásicas que las eléctricas. Es de notar que manejan las bicicletas clásicas y las eléctricas en un porcentaje cercano al 30%.
+14. Los miembros anuales no usan docked; los ocasionales muy poco, aunque el tiempo promedio ( alrededor de 18 minutos) es mayor al viajar con clásicas y eléctricas.
+15. Se nota un uso constante por promedio de tiempo de manejo en ambos tipos de miembros, tanto en la estadística mensual (salvo el periodo de cuarentena) y por día de la semana.
+16. En general, las eléctricas son más usadas que las clásicas.
+17. Las bicicletas clásicas son usadas, alrededor de 100% más, por los miembros anuales que los ocasionales. Aunque estos últimos lo usen 2 minutos más en promedio.
+18. Las bicicletas eléctricas son usadas, alrededor de 25% más, por los miembros anuales que los ocasionales. Aunque estos últimos lo usen 2 minutos más en promedio.
+
+### Recomendaciones.
+
+1.  Armar una campaña para que los usuarios ocasionales se conviertan en miembros anuales en cuanto al uso de las bicicletas clásicas. Hay una área de oportunidad de incrementar el número de viajes en al menos 80% más en este tipo de bicicletas. En menor medida pero sin dejar de contemplar en la campaña a las eléctricas.
+2.  La campaña debe reflejar la necesidad de hacer el uso de la bicicleta entre semana, para ir al trabajo, por ejemplo. Reflejando los beneficios del ejercicio y otras relacionadas al tráfico, orientado a una población que esté dispuesta a pedalear entre 10 y 15 minutos, por ejemplo.
+3.  Hacer una campaña que premie al ciclista ocasional por el mayor tiempo de uso (distintos niveles de membresía por tiempo de manejo, por ejemplo).
+4.  Verificar si las bicicletas tipo docked pueden ser mantenidas, financieramente. Revisar si se trata de un nicho de mercado.
