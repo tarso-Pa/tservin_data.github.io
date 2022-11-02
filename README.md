@@ -4,7 +4,7 @@
 ### **1. Diferencias entre miembros anuales y ocasionales de la empresa Cyclistic.**
 #### Caso práctico del curso de certificación en Análisis de Datos de Google. Todas las fases del análisis de datos se han realizado en RStudio 2022.07.2.
 
-La empresa *Cyclistic* tiene dos tipos de usuarios: los miembros anuales y los ocasionales, la gerencia de marketing quiere diseñar una estrategia que convenza a los usuarios ocasionales a comprar una membresía anual. Y para eso, el equipo de analistas necesita entender las diferencias entre ambos miembros.
+La empresa *Cyclistic* tiene dos tipos de usuarios: los miembros anuales y los ocasionales, la gerencia de marketing quiere diseñar una estrategia que convenza a los usuarios ocasionales a comprar una membresía anual. Y para eso, el equipo de analistas necesita entender las diferencias entre ambos tipos de miembros.
 
 * [Script en R](Diferencias%20entre%20miembros%20anuales%20y%20ocasionales%20de%20Cyclistic/CasoBicicletas_R_v2.R)
 * [Reporte en R_Markdown.](Diferencias%20entre%20miembros%20anuales%20y%20ocasionales%20de%20Cyclistic/Report_Cyclistic.Rmd)
