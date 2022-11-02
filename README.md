@@ -6,10 +6,10 @@
 
 La empresa *Cyclistic* tiene dos tipos de usuarios: los miembros anuales y los ocasionales, la gerencia de marketing quiere diseñar una estrategia que convenza a los usuarios ocasionales a comprar una membresía anual. Y para eso, el equipo de analistas necesita entender las diferencias entre ambos miembros.
 
-* [Reporte en R_Markdown.](Diferencias entre miembros anuales y ocasionales de Cyclistic/Report_Cyclistic.Rmd)
-* [Reporte en html.](Diferencias entre miembros anuales y ocasionales de Cyclistic/Report_Cyclistic.html)
-* [Reporte en pdf.](Diferencias entre miembros anuales y ocasionales de Cyclistic/Report_Cyclistic.pdf)
-* [Gráficos.](https://github.com/tarso-Pa/tarso-Pa.github.io/tree/main/Diferencias%20entre%20miembros%20anuales%20y%20ocasionales%20de%20Cyclistic/Gr%C3%A1ficos)
+* [Reporte en R_Markdown.](Diferencias%20entre%20miembros%20anuales%20y%20ocasionales%20de%20Cyclistic/Report_Cyclistic.Rmd)
+* [Reporte en html.](Diferencias%20entre%20miembros%20anuales%20y%20ocasionales%20de%20Cyclistic/Report_Cyclistic.html)
+* [Reporte en pdf.](Diferencias%20entre%20miembros%20anuales%20y%20ocasionales%20de%20Cyclistic/Report_Cyclistic.pdf)
+* [Gráficos.](Diferencias%20entre%20miembros%20anuales%20y%20ocasionales%20de%20Cyclistic/Gr%C3%A1ficos)
 
 *[Descarga aquí lo archivos correspondientes a octubre de 2021 a septiembre de 2022.](https://divvy-tripdata.s3.amazonaws.com/index.html)* He aquí la *[licencia de uso de datos.](https://www.divvybikes.com/data-license-agreement)*
 
