@@ -11,11 +11,12 @@ output:
 
 En 2016, Cyclistic inició operaciones en la ciudad de Chicago. Actualmente, tiene una flota de 5,824 bicicletas georreferenciadas y bloqueadas en una red de 692 estaciones. El proceso de la renta de bicicletas se resume a: el usuario desbloquea en una estación una unidad y la devuelve en otra quedando nuevamente bloqueada y disponible para otro viaje.
 
-Al día de hoy, existen planes de precios: pases de un solo viaje y pases de un día completo para los ciclistas ocasionales y membresías anuales para los miembros de Cyclistic.
+Al día de hoy,  existen planes de precios: pases de un solo viaje y pases de un día completo para los ciclistas ocasionales y membresías anuales para los miembros de Cyclistic. 
 
-Su departamento de finanzas asegura que los miembros anuales son mucho más rentables que los ciclistas ocasionales. La gerente de marketing, Lily Moreno, tiene la hipótesis de que aumentar el número de membresías anuales será importante financieramente. En lugar de propiciar el aumento clientes nuevos, la gerente ve la oportunidad de convertir a los ciclistas ocasionales en miembros anuales por el uso ya probado de las bicicletas rentadas.
+Su departamento de finanzas asegura que los miembros anuales son mucho más rentables que los ciclistas ocasionales. La gerente de marketing, Lily Moreno, tiene la hipótesis de que aumentar el número de membresías anuales será importante financieramente. En lugar de  propiciar el aumento clientes nuevos, la gerente  ve la oportunidad de convertir a los ciclistas ocasionales en miembros anuales por el uso ya probado de las bicicletas rentadas. 
 
 Para ello, se requiere entender las diferencias entre los usuarios ciclistas ocasionales y los miembros que pagan una anualidad.Resultado de ese análisis, el equipo de marketing diseñará una nueva estrategia para convencer a los ciclistas de ocasión de convertirse en miembros anuales.
+
 
 ## Paso 1: Preguntar
 
@@ -25,13 +26,13 @@ En este reporte, se abordará la primera de las preguntas: "¿En qué se diferen
 
 ### ¿Quiénes son las personas interesadas en este proyecto?
 
--   Cyclistic: La empresa de renta de bicicletas compartidas tiene 5,800 unidades y 600 estaciones. Los usos más frecuentes de renta es para usos recreativos, pero alrededor del 30% la utiliza para ir al trabajo.
+* Cyclistic: La empresa de renta de bicicletas compartidas tiene 5,800 unidades y 600 estaciones. Los usos más frecuentes de renta es para usos recreativos, pero alrededor del 30% la utiliza para ir al trabajo.
 
--   Lily Moreno: La directora de marketing es responsable del desarrollo de campañas, en redes sociales y otros canales, para promover el programa de renta de bicicletas.
+* Lily Moreno: La directora de marketing es responsable del desarrollo de campañas, en redes sociales y otros canales, para promover el programa de renta de bicicletas. 
 
--   Equipo de análisis computacional de datos de marketing de Cyclistic: se encarga de recopilar, analizar e informar datos que coadyuvan a la estrategia de marketing de la empresa. El autor de este informe, miembro de este equipo, trabaja desde hace seis meses como analista de datos júnior.
+* Equipo de análisis computacional de datos de marketing de Cyclistic: se encarga de recopilar, analizar e informar datos que coadyuvan a la estrategia de marketing de la empresa. El autor de este informe, miembro de este equipo, trabaja desde hace seis meses como analista de datos júnior.
 
--   Equipo ejecutivo de Cyclistic: Los ejecutivos de la empresa quienes decidirán si aprueba el programa de marketing recomendado, basado en el análisis de datos presente.
+* Equipo ejecutivo de Cyclistic: Los ejecutivos de la empresa quienes decidirán si aprueba el programa de marketing recomendado, basado en el análisis de datos presente.
 
 ## Paso 2: Preparar
 
@@ -39,23 +40,24 @@ Los datos para este análisis, son proporcionados por la propia empresa (para ef
 
 Los datos se organizan de esta manera:
 
-| Campo              | Español                  | Tipo       |
-|--------------------|--------------------------|------------|
-| ride_id            | id de launidad           | caracter   |
-| rideable_type      | tipo de bicicleta        | caracter   |
-| started_at         | comienza en (desbloqueo) | fecha-hora |
-| ended_at           | termina en (bloqueo)     | fecha-hora |
-| start_station_name | estación inicial         | caracter   |
-| start_station_id   | id estacion inicial      | caracter   |
-| end_station_name   | estación final           | caracter   |
-| end_station_id     | id estación final        | caracter   |
-| start_lat          | latitud inicial          | numérico   |
-| start_lng          | longitud inicial         | numérico   |
-| end_lat            | latitud final            | numérico   |
-| end_lng            | longitud final           | numérico   |
-| member_casual      | miembro u ocasional      | caracter   |
+Campo                   | Español                 | Tipo
+----------------------- | ----------------------- | -----------------------
+ride_id	                | id  de launidad         |	caracter
+rideable_type	          | tipo de bicicleta       | caracter 
+started_at	            | comienza en	(desbloqueo)| fecha-hora
+ended_at	              | termina en (bloqueo)    | fecha-hora
+start_station_name	    | estación inicial	      | caracter
+start_station_id	      | id estacion inicial	    | caracter
+end_station_name	      | estación final	        | caracter
+end_station_id	        | id estación final	      | caracter
+start_lat	              | latitud inicial	        | numérico
+start_lng	              | longitud inicial	      | numérico
+end_lat	                | latitud final	          | numérico
+end_lng	                | longitud final	        | numérico
+member_casual	          | miembro u ocasional	    | caracter
 
 En una revisión rápida, todas las columnas de todos los archivos tienen el mismo nombre. Es de notar que hay muchos registros sin observaciones en los campos referentes a las estaciones. Además, no existen campos que refieran a id o nombre de usuario, por lo que se usará el número de viajes, la duración de los mismos y el tipo de usuario para el análisis.
+
 
 ## Paso 3: Procesar
 
@@ -69,7 +71,6 @@ library(ggplot2)
 library(dplyr)
 library(lessR)
 ```
-
 ```{r}
 # Importando archivos csv
 m1<- read_csv("202110-divvy-tripdata.csv")
@@ -85,7 +86,6 @@ m10<- read_csv("202207-divvy-tripdata.csv")
 m11<- read_csv("202208-divvy-tripdata.csv")
 m12<- read_csv("202209-divvy-tripdata.csv")
 ```
-
 ```{r}
 # Revisando nombres de columnas
 colnames(m1)
@@ -145,7 +145,6 @@ m12 <- m12 %>% select(rideable_type, started_at, ended_at, member_casual)
 ## Paso 4: Analizar
 
 Antes de analizar los datos, se deben concolidar todos ellos en un data frame y revisar que tenga el formato correcto.
-
 ```{r}
 # Uniendo todos los data frame
 total_trips_v2 <- bind_rows(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12)
@@ -204,10 +203,8 @@ quantile(total_trips_v2$ride_length)
 ```
 
 ### Problemas detectados:
-
--   Hay mucho outliers por la derecha, hace que los valores de los cuartiles estén muy por debajo de los valores necesarios para el análisis.
--   Hay diferencias de tiempo negativas, hay que filtrar el valor de 1 minuto hacia adelante.
-
+* Hay mucho outliers por la derecha, hace que los valores de los cuartiles estén muy por debajo de los valores necesarios para el análisis.
+* Hay diferencias de tiempo negativas, hay que filtrar el valor de 1 minuto hacia adelante.
 ```{r}
 # Filtrando tiempo de viaje conforme a restricciones establecidas, mínimo 1 min, máximo 60 min.
 total_trips_v2 <- total_trips_v2 %>% 
@@ -223,7 +220,6 @@ boxplot(total_trips_v2$ride_length
         , main = "Tiempo de viaje, con outliers"
         , ylab = "Tiempo en minutos")
 ```
-
 ```{r}
 # Calculando la última observación antes de (Q3 + 1.5RI)
 # Q1 = 8.18, Q3 = 20.22, IR = Q3 - Q1
@@ -447,8 +443,8 @@ total_trips_v2 %>%
   facet_wrap(~member_casual) +
   theme(axis.text.x = element_text(angle = 45)) +
   geom_col(position = "dodge")
-```
-
+```  
+  
 ```{r}
 # Gráfico de barras 5
 # Let's visualize the number of rides by rider type + facet(member_casual)
@@ -482,6 +478,7 @@ total_trips_v2 %>%
   theme(axis.text.x = element_text(angle = 45)) +
   geom_col(position = "dodge")
 ```
+
 
 ```{r}
 # Gráfico de barras 7: apilamiento combinando "rideable_type" con "member_casual" 
@@ -553,25 +550,26 @@ total_trips_v2 %>%
 
 ## Paso 6: Actuar
 
+
 ### Conclusiones.
 
-1.  En los último 12 meses, los miembros anuales hicieron más viajes (62% del total), en comparación con los ocasionales (38%), un 24% más.
-2.  El 75% de las veces, los tiempos de viajes duraron entre 1 y 15 minutos, aproximadamente.
-3.  A partir del minuto 10 de viaje, baja considerablemente el número de viajes con mayor duración.
-4.  Los días con más viajes: sábado, jueves y viernes.
-5.  Los días con menos viajes: lunes, miércoles y martes.
-6.  En promedio, el tiempo de viaje de los ocasionales es mayor que de los anuales, al menos 20% más: **lunes, 28% más**; martes, 21.7% más; miércoles, 20.1% más; jueves, 21.3% más; viernes, 24.7% más; **sábado 25.2% más; y domingo, 27.4% más.**
-7.  Sin embargo, los miembros anuales hacen más viajes que los ocasionales: **lunes, 93.4% más; martes, 116.0% más; miércoles, 107.0 más; jueves, 89.0% más; viernes, 54% más;** sábado 5.6% más; y domingo, 12.4% más.
-8.  En general, el día con más salidas es el sábado. Sábado, domingo y lunes son los días con mayor tiempo promedio de uso en el siguiente orden: docked, clásica y eléctrica.
-9.  Resumen del uso de bicicleta por tipo de usuario y tipo de bicicleta.
+1. En los último 12 meses, los miembros anuales hicieron más viajes (62% del total), en comparación con los ocasionales (38%), un 24% más.
+2. El 75% de las veces, los tiempos de viajes duraron entre 1 y 15 minutos, aproximadamente.
+3. A partir del minuto 10 de viaje, baja considerablemente el número de viajes con mayor duración.
+4. Los días con más viajes: sábado, jueves y viernes.
+5. Los días con menos viajes: lunes, miércoles y martes.
+6. En promedio, el tiempo de viaje de los ocasionales es mayor que de los anuales, al menos 20% más: **lunes, 28% más**; martes,  21.7% más; miércoles, 20.1% más; jueves, 21.3% más; viernes, 24.7% más; **sábado 25.2% más; y domingo, 27.4% más.**
+7. Sin embargo, los miembros anuales hacen más viajes que los ocasionales: **lunes, 93.4% más; martes,  116.0% más; miércoles, 107.0 más; jueves, 89.0% más; viernes, 54% más; **sábado 5.6% más; y domingo, 12.4% más.
+8. En general, el día con más salidas es el sábado. Sábado, domingo y lunes son los días con mayor tiempo promedio de uso en el siguiente orden: docked, clásica y eléctrica.
+9. Resumen del uso de bicicleta por tipo de usuario y tipo de bicicleta.
 
-| Tipo de usuario | Tipo de bicicleta | Tiempo prom. min | \% de viajes |
-|-----------------|-------------------|------------------|--------------|
-| member          | classic           | 11.30            | 32.3         |
-| member          | electric          | 10.32            | 29.3         |
-| casual          | electric          | 12.61            | 21.4         |
-| casual          | classic           | 14.31            | 14.7         |
-| casual          | docked            | 19.06            | 2.2          |
+Tipo de usuario   | Tipo de bicicleta | Tiempo prom. min  | % de viajes
+----------------- | ----------------- | ----------------- | -----------------
+member	          | classic           |	11.30             | 32.3
+member	          | electric          |	10.32             | 29.3
+casual	          | electric          | 12.61             | 21.4
+casual	          | classic           | 14.31             | 14.7
+casual	          | docked            | 19.06             |  2.2
 
 10. Los ocasionales tienen viajes entre 1 y 19 minutos de duración el 75% de las veces; los miembros anuales lo hacen hasta 13 minutos por viaje.
 11. Hubo un gran descenso en el uso de las bicicletas de Cyclistic entre noviembre del 2021 y abril del 2022 por una ola de Covid-19 en el condado de Cook. Aún así se ve que los miembros anuales usan más las bicicletas que los ocasionales, todos los meses de estudio; aunque se observa un notorio descenso en agosto y septiembre del 2022 entre los ocasionales.
@@ -583,9 +581,10 @@ total_trips_v2 %>%
 17. Las bicicletas clásicas son usadas, alrededor de 100% más, por los miembros anuales que los ocasionales. Aunque estos últimos lo usen 2 minutos más en promedio.
 18. Las bicicletas eléctricas son usadas, alrededor de 25% más, por los miembros anuales que los ocasionales. Aunque estos últimos lo usen 2 minutos más en promedio.
 
+
 ### Recomendaciones.
 
-1.  Armar una campaña para que los usuarios ocasionales se conviertan en miembros anuales en cuanto al uso de las bicicletas clásicas. Hay una área de oportunidad de incrementar el número de viajes en al menos 80% más en este tipo de bicicletas. En menor medida pero sin dejar de contemplar en la campaña a las eléctricas.
-2.  La campaña debe reflejar la necesidad de hacer el uso de la bicicleta entre semana, para ir al trabajo, por ejemplo. Reflejando los beneficios del ejercicio y otras relacionadas al tráfico, orientado a una población que esté dispuesta a pedalear entre 10 y 15 minutos, por ejemplo.
-3.  Hacer una campaña que premie al ciclista ocasional por el mayor tiempo de uso (distintos niveles de membresía por tiempo de manejo, por ejemplo).
-4.  Verificar si las bicicletas tipo docked pueden ser mantenidas, financieramente. Revisar si se trata de un nicho de mercado.
+1. Armar una campaña para que los usuarios ocasionales se conviertan en miembros anuales en cuanto al uso de las bicicletas clásicas. Hay una área de oportunidad de incrementar el número de viajes en al menos 80% más en este tipo de bicicletas. En menor medida pero sin dejar de contemplar en la campaña a las eléctricas.
+2. La campaña debe reflejar la necesidad de hacer el uso de la bicicleta entre semana, para ir al trabajo, por ejemplo. Reflejando los beneficios del ejercicio y otras relacionadas al tráfico, orientado a una población que esté dispuesta a pedalear entre 10 y 15 minutos, por ejemplo.
+3. Hacer una campaña que premie al ciclista ocasional por el mayor tiempo de uso (distintos niveles de membresía por tiempo de manejo, por ejemplo).
+4. Verificar si las bicicletas tipo docked pueden ser mantenidas, financieramente. Revisar si se trata de un nicho de mercado.
