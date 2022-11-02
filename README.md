@@ -1,4 +1,3 @@
-# Tadeo Roberto Servin Ordoñez, analista de datos.
 ## Bienvenido a mi portafolio de Análisis de Datos <em>#DataAnalysis</em>
 
 ### **1. Diferencias entre miembros anuales y ocasionales de la empresa Cyclistic.**
