@@ -17,7 +17,7 @@ La empresa *Cyclistic* tiene dos tipos de usuarios: los miembros anuales y los o
 *R Core Team (2022). R: A language and environment for statistical computing. R Foundation*
 *for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.*
 
-### **2. Habilidades en MS Excel
+### **2. Habilidades en MS Excel.**
 Aquí muestro alguno de los trabajos que realizado en MS Excel. Funciones como BUSCARV(), PROMEDIO() y herramientas como tablas y gráficos dinámicos son utilizados en ellos. ¡Pura diversión!
 
 * [11 Ejercicios de Excel: Limpieza de datos, tablas y gráficos dinámicos, Dashboard y algunos tipos de gráficos.](Excel/11%20Ejercicios_LimpiezaGr%C3%A1ficosDashboard.xlsx)
