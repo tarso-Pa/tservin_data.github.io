@@ -9,7 +9,7 @@ La empresa *Cyclistic* tiene dos tipos de usuarios: los miembros anuales y los o
 * [Reporte en R Markdown.](Diferencias%20entre%20miembros%20anuales%20y%20ocasionales%20de%20Cyclistic/Report_Cyclistic.Rmd)
 * [Reporte en html.](Diferencias%20entre%20miembros%20anuales%20y%20ocasionales%20de%20Cyclistic/Report_Cyclistic.html)
 * [Reporte en pdf.](Diferencias%20entre%20miembros%20anuales%20y%20ocasionales%20de%20Cyclistic/Report_Cyclistic.pdf)
-* [Gráficos del análisis, en R.](Diferencias%20entre%20miembros%20anuales%20y%20ocasionales%20de%20Cyclistic/Gr%C3%A1ficos)
+* [Gráficos del análisis, en R.](https://github.com/tarso-Pa/tservin_data.github.io/tree/main/Diferencias%20entre%20miembros%20anuales%20y%20ocasionales%20de%20Cyclistic/Gr%C3%A1ficos)
 * [Más gráficos del análisis, en Tableau.](https://public.tableau.com/views/CasoCyclisticmembervscasual_/Resumen?:language=es-ES&publish=yes&:display_count=n&:origin=viz_share_link)
 
 *[Descarga aquí lo archivos correspondientes a octubre de 2021 a septiembre de 2022.](https://divvy-tripdata.s3.amazonaws.com/index.html)* He aquí la *[licencia de uso de datos.](https://www.divvybikes.com/data-license-agreement)*
